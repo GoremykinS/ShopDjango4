@@ -1,0 +1,71 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% load query_url %}
+
+
+{% block 'content' %}
+				<a href="#" class="search"></a>
+                <a href="#" class="basket"></a>
+			</div>
+		</div>
+
+		<div>
+			{% include 'mainapp/include/inc_menu_products.html' %}
+			<div class="details-products">
+				<div class="text">
+					{% if products.has_previous %}
+						<a href = "{% url 'products_index' %}{% urlparams page=products.previous_page_number %}" >Назад</a>
+					{% endif %}
+					<br>
+					{% if products.has_next %}
+						<a href = "{% url 'products_index' %}{% urlparams page=products.next_page_number %}" >Вперед</a>
+					{% endif %}
+				</div>
+
+				{% for product in products %}
+				<div class="details-slider">
+					<div style=" margin-top: 60px ">
+						<div>
+							<a href="#"><img style="height: 320px; width: 320px;" src="/media/{{ product.image }}" alt=""></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="description">
+					<h3 class="big-bold">{{ product.name }}</h3>
+					<h3 class="red">Скидка 10%</h3>
+					<p class="price"> {{ product.price }} <span>руб</span></p>
+					<a href="{% url 'add_to_cart' product.id %}" class="red-button">
+						заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+					</a>
+					<div class="description-text">
+						{{ product.description|linebreaks }}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="description">
+				{% if products.has_previous %}
+					<a href = "{% url 'products_index' %}{% urlparams page=products.previous_page_number %}" >Назад</a>
+				{% endif %}
+				<br>
+				{% if products.has_next %}
+					<a href = "{% url 'products_index' %}{% urlparams page=products.next_page_number %}" >Вперед</a>
+				{% endif %}
+			</div>
+
+			<div class="related">
+				<div class="related-products clearfix">
+					<h2>Горячая распродажа</h2>
+						<a href="#"><img style="height: 238px; width: 238px;" src="/media/{{ hot_product.image }}" alt="">
+							<div class="text">
+								<img src="static/img/icon-hover.png" >
+								<h4>{{ hot_product.name }}</h4>
+								<p>{{ hot_product.description }} </p>
+							</div>
+						</a>
+				</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+{% endblock %}

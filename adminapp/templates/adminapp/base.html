@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="/static/fonts/font-awesome/css/font-awesome.css">
+</head>
+
+
+<body>
+    <div class="admin_container">
+        <div class="h2 text-center head">
+            <h3>Админка</h3>
+        </div>
+        <br>
+        {% block menu %}
+            <div class="admin_menu">
+                {% include 'adminapp/includes/inc_menu.html' %}
+            </div>
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+        </div>
+    </body>
+</html>

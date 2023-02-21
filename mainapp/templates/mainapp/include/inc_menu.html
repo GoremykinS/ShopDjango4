@@ -1,0 +1,53 @@
+
+			<div class="header clearfix">
+				<a href="/" class="logo"></a>
+				<ul class="menu">
+					{% for link in menu_links %}
+							<li><a	href="{% url link.view_name %}"
+
+								 "{% if request.resolver_match.url_name == link.view_name %}"  class = active "{% endif %}"
+
+								
+								{{ link.name }}
+
+
+						 		"{% if categories%}  {%if request.resolver_match.url_name == product_index.id %}" class = active "{% endif %}" "{% endif %}"
+								>
+								{{ link.name }}
+
+								</a>
+							</li>
+
+					{% endfor %}
+
+
+
+						{% if user.is_authenticated %}
+						<li>
+							<a href="{% url 'edit' %}">
+								{{ user.first_name|default:'Пользователь' }}
+							</a>
+						</li>
+						{% endif %}
+						<li>
+							{% if user.is_authenticated %}
+							<a href="{% url 'logout' %}">выйти</a>
+							{% else %}
+							<a href="{% url 'login' %}">войти</a>
+							<a href="{% url 'register' %}">Зарегистрироваться</a>
+							{% endif %}
+							{% if user.is_superuser %}
+							<li>
+								<a href = "{% url 'users' %}">админка</a>
+							</li>
+							{% endif %}
+							<a href="{% url 'view' %}">Корзина
+								{% if request.user.cart.has_items %}
+									({{ request.user.cart.amount }}, {{ request.user.cart.total_cost }})
+								{% endif %}
+							</a>
+						</li>
+				</ul>
+
+<!--		нехватает в контактах-->
+<!--		<h1>наши контакты</h1>>-->

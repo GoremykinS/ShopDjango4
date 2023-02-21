@@ -1,0 +1,17 @@
+{% extends 'authapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'edit' %}" method="post" enype = "multipart/form-data">
+        {% csrf_token %}
+        {{ edit_form.as_p }}
+        <input slass= "form-control" type="submit" value="сохранить">
+    </form>
+    <button slass= "btn btn-round form-control last">
+        <a href = "{% url 'index' %}" class="">
+            на главную
+        </a>
+    </button>
+    <div class="user_avatar"><img src="/media/{{ user.avatar }}"></div>
+{% endblock %}
